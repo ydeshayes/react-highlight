@@ -1,8 +1,8 @@
 {
   "name": "highlightable",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Component that help highlighting text",
-  "main": "./lib/Highlight.min.js",
+  "main": "lib/Highlightable.min.js",
   "scripts": {
     "build": "webpack --mode=build",
     "dev": "webpack --progress --colors --watch --mode=dev",
