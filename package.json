@@ -1,6 +1,6 @@
 {
   "name": "highlightable",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Component that help highlighting text",
   "main": "lib/Highlightable.min.js",
   "scripts": {
@@ -48,7 +48,7 @@
   "bugs": {
     "url": "https://github.com/ydeshayes/react-highlight/issues"
   },
-  "homepage": "",
+  "homepage": "https://ydeshayes.github.io/react-highlight/",
   "dependencies": {
     "emoji-regex": "^6.0.0"
   }
