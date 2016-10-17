@@ -139,7 +139,7 @@ export default class Highlightable extends Component {
 
       // If the next node is an url one, we fast forward to the end of it
       if(url.length) {
-        textCharIndex += url.length;
+        textCharIndex += url.length - 1;
       } else if(isEmoji) {
         // Because an emoji is composed of 2 chars
         textCharIndex++;
