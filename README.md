@@ -13,6 +13,7 @@ ReactJS component that help you highlight ranges of text and give you callbacks 
 * Pass ranges and the component will highlight the text for you
 * Callback function that give you the start and end of the user highlited text
 * Customisable renderRange function that allow you to add tooltip on the top of user selection for exemple
+* Convert url string into link
 
 ## Getting started
 
