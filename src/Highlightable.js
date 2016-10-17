@@ -84,7 +84,7 @@ export default class Highlightable extends Component {
     const startHL = startContainerPosition < endContainerPosition ? startContainerPosition : endContainerPosition;
     const endHL = startContainerPosition < endContainerPosition ? endContainerPosition : startContainerPosition;
 
-    const rangeObj = new Range(startHL, endHL, text, this.props);
+    const rangeObj = new Range(startHL, endHL, text, Object.assign({}, this.props, {ranges: undefined}));
 
     this.props.onTextHighlighted(rangeObj);
   }
