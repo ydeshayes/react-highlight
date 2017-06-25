@@ -51,5 +51,6 @@
   "homepage": "https://ydeshayes.github.io/react-highlight/",
   "dependencies": {
     "emoji-regex": "^6.0.0"
-  }
+  },
+  "license" : "MIT"
 }
