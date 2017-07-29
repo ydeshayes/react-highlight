@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/ydeshayes/react-highlight.svg?branch=master)](https://travis-ci.org/ydeshayes/react-highlight)
 # Highlight component for ReactJS
 
 ReactJS component that help you highlight ranges of text and give you callbacks to detect user text selection.
