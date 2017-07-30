@@ -7,10 +7,10 @@ const Node = props => {
   const getKey = range => range ? getRangeKey() : getNormalKey();
 
   return (<span data-position={props.charIndex}
-                key={getKey(props.range)}
-                style={getStyle(props.range)}>
-                {props.children}
-         </span>);
+    key={getKey(props.range)}
+    style={getStyle(props.range)}>
+    {props.children}
+  </span>);
 };
 
 Node.propTypes = {

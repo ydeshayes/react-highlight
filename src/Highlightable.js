@@ -33,30 +33,30 @@ export default class Highlightable extends Component {
 
   getLetterNode(charIndex, range) {
     return (<Node id={this.props.id}
-                  range={range}
-                  charIndex={charIndex}
-                  key={`${this.props.id}-${charIndex}`}
-                  highlightStyle={this.props.highlightStyle}>
-              {this.props.text[charIndex]}
-            </Node>);
+      range={range}
+      charIndex={charIndex}
+      key={`${this.props.id}-${charIndex}`}
+      highlightStyle={this.props.highlightStyle}>
+      {this.props.text[charIndex]}
+    </Node>);
   }
 
   getEmojiNode(charIndex, range) {
     return (<EmojiNode text={this.props.text}
-                      id={this.props.id}
-                      range={range}
-                      key={`${this.props.id}-emoji-${charIndex}`}
-                      charIndex={charIndex}
-                      highlightStyle={this.props.highlightStyle} />);
+      id={this.props.id}
+      range={range}
+      key={`${this.props.id}-emoji-${charIndex}`}
+      charIndex={charIndex}
+      highlightStyle={this.props.highlightStyle} />);
   }
 
   getUrlNode(charIndex, range, url) {
     return (<UrlNode url={url}
-                    id={this.props.id}
-                    range={range}
-                    key={`${this.props.id}-url-${charIndex}`}
-                    charIndex={charIndex}
-                    highlightStyle={this.props.highlightStyle} />);
+      id={this.props.id}
+      range={range}
+      key={`${this.props.id}-url-${charIndex}`}
+      charIndex={charIndex}
+      highlightStyle={this.props.highlightStyle} />);
   }
 
   mouseEvent() {
@@ -191,8 +191,8 @@ export default class Highlightable extends Component {
 
     return (
       <div style={this.props.style}
-           onMouseUp={this.onMouseUp.bind(this)}
-           onDoubleClick={this.onDoubleClick.bind(this)}>
+        onMouseUp={this.onMouseUp.bind(this)}
+        onDoubleClick={this.onDoubleClick.bind(this)}>
         {newText}
       </div>
     );

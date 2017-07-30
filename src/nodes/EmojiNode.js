@@ -5,9 +5,9 @@ import Node from './Node';
 const EmojiNode = props => {
 
   return <Node id={props.id}
-               highlightStyle={props.highlightStyle}
-               charIndex={props.charIndex}
-               range={props.range}>
+    highlightStyle={props.highlightStyle}
+    charIndex={props.charIndex}
+    range={props.range}>
     {`${props.text[props.charIndex]}${props.text[props.charIndex + 1]}`}
   </Node>;
 };
