@@ -25,10 +25,10 @@ var config = {
     umdNamedDefine: true
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /(\.jsx|\.js)$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: /(node_modules|bower_components)/
       },
       {
@@ -39,8 +39,11 @@ var config = {
     ]
   },
   resolve: {
-    root: path.resolve('./src'),
-    extensions: ['', '.js']
+    modules: [
+      path.resolve('./src'),
+      path.resolve('./node_modules')
+    ],
+    extensions: ['.js']
   },
   plugins: plugins
 };
