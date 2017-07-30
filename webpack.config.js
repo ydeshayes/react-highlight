@@ -1,13 +1,13 @@
 var webpack = require('webpack');
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 var path = require('path');
-var env = require('yargs').argv.mode;
+var env = require('yargs').argv.env;
 
 var libraryName = 'Highlightable';
 
 var plugins = [], outputFile;
 
-if (env === 'build') {
+if (env.mode === 'build') {
   plugins.push(new UglifyJsPlugin({ minimize: true }));
   outputFile = libraryName + '.min.js';
 } else {
