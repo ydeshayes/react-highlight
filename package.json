@@ -24,6 +24,7 @@
     "eslint-plugin-react": "^7.1.0",
     "jsdom": "^11.1.0",
     "mocha": "3.4.2",
+    "prop-types": "^15.6.0",
     "react": "^15.6.1",
     "react-addons-test-utils": "^15.6.0",
     "react-dom": "^15.6.1",
@@ -51,5 +52,5 @@
   "dependencies": {
     "emoji-regex": "^6.5.1"
   },
-  "license" : "MIT"
+  "license": "MIT"
 }
