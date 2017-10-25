@@ -1,5 +1,7 @@
 import emojiRegex from 'emoji-regex';
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
 
 import EmojiNode from './nodes/EmojiNode';
 import Node from './nodes/Node';
@@ -200,16 +202,16 @@ export default class Highlightable extends Component {
 }
 
 Highlightable.propTypes = {
-  ranges: React.PropTypes.array,
-  id: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.number
+  ranges: PropTypes.array,
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
   ]),
-  text: React.PropTypes.string,
-  enabled: React.PropTypes.bool,
-  onMouseOverHighlightedWord: React.PropTypes.func,
-  onTextHighlighted: React.PropTypes.func,
-  highlightStyle: React.PropTypes.object,
-  style: React.PropTypes.object,
-  rangeRenderer: React.PropTypes.func
+  text: PropTypes.string,
+  enabled: PropTypes.bool,
+  onMouseOverHighlightedWord: PropTypes.func,
+  onTextHighlighted: PropTypes.func,
+  highlightStyle: PropTypes.object,
+  style: PropTypes.object,
+  rangeRenderer: PropTypes.func
 };

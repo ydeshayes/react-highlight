@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Node from './Node';
 
@@ -13,11 +14,11 @@ const EmojiNode = props => {
 };
 
 EmojiNode.propTypes = {
-  highlightStyle: React.PropTypes.object,
-  id: React.PropTypes.string,
-  charIndex: React.PropTypes.number,
-  range: React.PropTypes.object,
-  text: React.PropTypes.string
+  highlightStyle: PropTypes.object,
+  id: PropTypes.string,
+  charIndex: PropTypes.number,
+  range: PropTypes.object,
+  text: PropTypes.string
 };
 
 export default EmojiNode;

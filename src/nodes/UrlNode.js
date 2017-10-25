@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Node from './Node';
 
@@ -19,11 +20,11 @@ const UrlNode = props => {
 };
 
 UrlNode.propTypes = {
-  highlightStyle: React.PropTypes.object,
-  id: React.PropTypes.string,
-  charIndex: React.PropTypes.number,
-  range: React.PropTypes.object,
-  url: React.PropTypes.string
+  highlightStyle: PropTypes.object,
+  id: PropTypes.string,
+  charIndex: PropTypes.number,
+  range: PropTypes.object,
+  url: PropTypes.string
 };
 
 export default UrlNode;

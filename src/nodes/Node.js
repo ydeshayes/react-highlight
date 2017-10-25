@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Node = props => {
   const getStyle = range => range ? props.highlightStyle : props.style;
@@ -14,12 +15,12 @@ const Node = props => {
 };
 
 Node.propTypes = {
-  highlightStyle: React.PropTypes.object,
-  style: React.PropTypes.object,
-  id: React.PropTypes.string,
-  charIndex: React.PropTypes.number,
-  range: React.PropTypes.object,
-  children: React.PropTypes.node
+  highlightStyle: PropTypes.object,
+  style: PropTypes.object,
+  id: PropTypes.string,
+  charIndex: PropTypes.number,
+  range: PropTypes.object,
+  children: PropTypes.node
 };
 
 export default Node;
