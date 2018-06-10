@@ -1,13 +1,11 @@
 import emojiRegex from 'emoji-regex';
-import React, {Component} from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
-
-
 import EmojiNode from './nodes/EmojiNode';
 import Node from './nodes/Node';
 import Range from './Range';
 import UrlNode from './nodes/UrlNode';
-import {getUrl, debounce} from './helpers';
+import { getUrl, debounce } from './helpers';
 
 export default class Highlightable extends Component {
   constructor(props) {
@@ -18,17 +16,17 @@ export default class Highlightable extends Component {
 
   shouldComponentUpdate(newProps) {
     return newProps.ranges.length !== this.props.ranges.length
-            || newProps.text !== this.props.text
-            || newProps.enabled !== this.props.enabled;
+      || newProps.text !== this.props.text
+      || newProps.enabled !== this.props.enabled;
   }
 
   getRange(charIndex) {
     return this.props.ranges
-            && this.props.ranges.find(range => charIndex >= range.start && charIndex <= range.end);
+      && this.props.ranges.find(range => charIndex >= range.start && charIndex <= range.end);
   }
 
   onMouseOverHighlightedWord(range, visible) {
-    if(visible && this.props.onMouseOverHighlightedWord) {
+    if (visible && this.props.onMouseOverHighlightedWord) {
       this.props.onMouseOverHighlightedWord(range);
     }
   }
@@ -62,7 +60,7 @@ export default class Highlightable extends Component {
   }
 
   mouseEvent() {
-    if(!this.props.enabled) {
+    if (!this.props.enabled) {
       return false;
     }
 
@@ -74,7 +72,7 @@ export default class Highlightable extends Component {
       text = document.selection.createRange().text;
     }
 
-    if(!text || !text.length) {
+    if (!text || !text.length) {
       return false;
     }
 
@@ -86,7 +84,7 @@ export default class Highlightable extends Component {
     const startHL = startContainerPosition < endContainerPosition ? startContainerPosition : endContainerPosition;
     const endHL = startContainerPosition < endContainerPosition ? endContainerPosition : startContainerPosition;
 
-    const rangeObj = new Range(startHL, endHL, text, Object.assign({}, this.props, {ranges: undefined}));
+    const rangeObj = new Range(startHL, endHL, text, Object.assign({}, this.props, { ranges: undefined }));
 
     this.props.onTextHighlighted(rangeObj);
   }
@@ -96,7 +94,7 @@ export default class Highlightable extends Component {
       if (this.doucleckicked) {
         this.doucleckicked = false;
         this.dismissMouseUp++;
-      } else if(this.dismissMouseUp > 0) {
+      } else if (this.dismissMouseUp > 0) {
         this.dismissMouseUp--;
       } else {
         this.mouseEvent.bind(this)();
@@ -118,9 +116,9 @@ export default class Highlightable extends Component {
   }
 
   getNode(i, range, text, url, isEmoji) {
-    if(url.length) {
+    if (url.length) {
       return this.getUrlNode(i, range, url);
-    }else if(isEmoji) {
+    } else if (isEmoji) {
       return this.getEmojiNode(i, range);
     }
 
@@ -132,7 +130,7 @@ export default class Highlightable extends Component {
     let lastRange;
 
     // For all the characters on the text
-    for(let textCharIndex = 0;textCharIndex < this.props.text.length;textCharIndex++) {
+    for (let textCharIndex = 0; textCharIndex < this.props.text.length; textCharIndex++) {
       const range = this.getRange(textCharIndex);
       const url = getUrl(textCharIndex, this.props.text);
       const isEmoji = emojiRegex().test(this.props.text[textCharIndex] + this.props.text[textCharIndex + 1]);
@@ -140,14 +138,14 @@ export default class Highlightable extends Component {
       const node = this.getNode(textCharIndex, range, this.props.text, url, isEmoji);
 
       // If the next node is an url one, we fast forward to the end of it
-      if(url.length) {
+      if (url.length) {
         textCharIndex += url.length - 1;
-      } else if(isEmoji) {
+      } else if (isEmoji) {
         // Because an emoji is composed of 2 chars
         textCharIndex++;
       }
 
-      if(!range) {
+      if (!range) {
         newText.push(node);
         continue;
       }
@@ -160,10 +158,10 @@ export default class Highlightable extends Component {
       // For all the characters in the highlighted range
       let rangeCharIndex = textCharIndex + 1;
 
-      for(;rangeCharIndex < parseInt(range.end) + 1;rangeCharIndex++) {
+      for (; rangeCharIndex < parseInt(range.end) + 1; rangeCharIndex++) {
         const isEmoji = emojiRegex().test(`${this.props.text[rangeCharIndex]}${this.props.text[rangeCharIndex + 1]}`);
 
-        if(isEmoji) {
+        if (isEmoji) {
           letterGroup.push(this.getEmojiNode(rangeCharIndex, range));
           // Because an emoji is composed of 2 chars
           rangeCharIndex++;
@@ -180,7 +178,7 @@ export default class Highlightable extends Component {
         this.onMouseOverHighlightedWord.bind(this)));
     }
 
-    if(lastRange) {
+    if (lastRange) {
       // Callback function
       this.onMouseOverHighlightedWord(lastRange, true);
     }
@@ -193,6 +191,7 @@ export default class Highlightable extends Component {
 
     return (
       <div style={this.props.style}
+        
         onMouseUp={this.onMouseUp.bind(this)}
         onDoubleClick={this.onDoubleClick.bind(this)}>
         {newText}

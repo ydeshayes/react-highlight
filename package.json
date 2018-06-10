@@ -5,7 +5,7 @@
   "main": "lib/Highlightable.min.js",
   "scripts": {
     "build": "webpack --env.mode=build",
-    "dev": "webpack --progress --colors --watch --mode=dev",
+    "dev": "webpack --progress --colors --watch --env.mode=dev",
     "test": "mocha ./test/.setup.js ./test/**/*.spec.js"
   },
   "devDependencies": {
