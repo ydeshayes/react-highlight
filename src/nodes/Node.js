@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Node = props => {
-  const getStyle = range => range ? props.highlightStyle : props.style;
+  const getStyle = range => range ? (typeof props.highlightStyle === 'function' ? props.highlightStyle(range, props.charIndex) : props.highlightStyle) : props.style;
   const getRangeKey = () => `${props.id}-${props.range.start}-${props.charIndex}`;
   const getNormalKey = () => `${props.id}-${props.charIndex}`;
   const getKey = range => range ? getRangeKey() : getNormalKey();
