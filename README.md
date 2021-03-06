@@ -45,7 +45,8 @@ ReactJS component that help you highlight ranges of text and give you callbacks 
 * **onTextHighlighted** -> func: Callback function when the user highlight new text.
 `(range) => {}`
 
-* **highlightStyle** -> obj: Style of the text when the text is highlighted.
+* **highlightStyle** -> obj: Style of the text when the text is highlighted. or func: 
+`(range, charIndex) => {return style}`
 * **style** -> obj: The style of the main div container
 
 * **rangeRenderer** -> func: Use this function to customise the render of the highlighted text.
