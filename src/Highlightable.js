@@ -1,7 +1,6 @@
 import emojiRegex from 'emoji-regex';
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
 
 import EmojiNode from './nodes/EmojiNode';
 import Node from './nodes/Node';
@@ -9,135 +8,148 @@ import Range from './Range';
 import UrlNode from './nodes/UrlNode';
 import {getUrl, debounce} from './helpers';
 
-export default class Highlightable extends Component {
-  constructor(props) {
-    super(props);
+const Highlightable = (
+  {
+    ranges,
+    onMouseOverHighlightedWord,
+    id,
+    highlightStyle,
+    text,
+    enabled,
+    rangeRenderer,
+    style,
+    onTextHighlighted
+  }) => {
+  let dismissMouseUp = 0;
 
-    this.dismissMouseUp = 0;
-  }
+  let doucleckicked = false;
 
-  shouldComponentUpdate(newProps) {
-    return newProps.ranges.length !== this.props.ranges.length
-            || newProps.text !== this.props.text
-            || newProps.enabled !== this.props.enabled;
-  }
+  const getRange = charIndex => {
+    return ranges
+            && ranges.find(r => charIndex >= r.start && charIndex <= r.end);
+  };
 
-  getRange(charIndex) {
-    return this.props.ranges
-            && this.props.ranges.find(range => charIndex >= range.start && charIndex <= range.end);
-  }
-
-  onMouseOverHighlightedWord(range, visible) {
-    if(visible && this.props.onMouseOverHighlightedWord) {
-      this.props.onMouseOverHighlightedWord(range);
+  const onMouseOverHighlightedWordHandler = (range, visible) => {
+    if(visible && onMouseOverHighlightedWord) {
+      onMouseOverHighlightedWord(range);
     }
-  }
+  };
 
-  getLetterNode(charIndex, range) {
-    return (<Node id={this.props.id}
+  const getLetterNode = (charIndex, range) => {
+    return (<Node id={id}
       range={range}
       charIndex={charIndex}
-      key={`${this.props.id}-${charIndex}`}
-      highlightStyle={this.props.highlightStyle}>
-      {this.props.text[charIndex]}
+      key={`${id}-${charIndex}`}
+      highlightStyle={highlightStyle}>
+      {text[charIndex]}
     </Node>);
-  }
+  };
 
-  getEmojiNode(charIndex, range) {
-    return (<EmojiNode text={this.props.text}
-      id={this.props.id}
+  const getEmojiNode = (charIndex, range) => {
+    return (<EmojiNode text={text}
+      id={id}
       range={range}
-      key={`${this.props.id}-emoji-${charIndex}`}
+      key={`${id}-emoji-${charIndex}`}
       charIndex={charIndex}
-      highlightStyle={this.props.highlightStyle} />);
-  }
+      highlightStyle={highlightStyle} />);
+  };
 
-  getUrlNode(charIndex, range, url) {
+  const getUrlNode = (charIndex, range, url) => {
     return (<UrlNode url={url}
-      id={this.props.id}
+      id={id}
       range={range}
-      key={`${this.props.id}-url-${charIndex}`}
+      key={`${id}-url-${charIndex}`}
       charIndex={charIndex}
-      highlightStyle={this.props.highlightStyle} />);
-  }
+      highlightStyle={highlightStyle} />);
+  };
 
-  mouseEvent() {
-    if(!this.props.enabled) {
+  const mouseEvent = () => {
+    if(!enabled) {
       return false;
     }
 
-    let text = '';
+    let t = '';
 
     if (window.getSelection) {
-      text = window.getSelection().toString();
+      t = window.getSelection().toString();
     } else if (document.selection && document.selection.type !== 'Control') {
-      text = document.selection.createRange().text;
+      t = document.selection.createRange().text;
     }
 
-    if(!text || !text.length) {
+    if(!t || !t.length) {
       return false;
     }
 
-    const range = window.getSelection().getRangeAt(0);
+    const r = window.getSelection().getRangeAt(0);
 
-    const startContainerPosition = parseInt(range.startContainer.parentNode.dataset.position);
-    const endContainerPosition = parseInt(range.endContainer.parentNode.dataset.position);
+    const startContainerPosition = parseInt(r.startContainer.parentNode.dataset.position);
+    const endContainerPosition = parseInt(r.endContainer.parentNode.dataset.position);
 
     const startHL = startContainerPosition < endContainerPosition ? startContainerPosition : endContainerPosition;
     const endHL = startContainerPosition < endContainerPosition ? endContainerPosition : startContainerPosition;
 
-    const rangeObj = new Range(startHL, endHL, text, Object.assign({}, this.props, {ranges: undefined}));
+    const rangeObj = new Range(startHL, endHL, text, {
+      ranges: undefined,
+      onMouseOverHighlightedWord,
+      id,
+      text,
+      enabled,
+      rangeRenderer,
+      onTextHighlighted,
+      style
+    });
 
-    this.props.onTextHighlighted(rangeObj);
-  }
+    onTextHighlighted(rangeObj);
+  };
 
-  onMouseUp(event) {
+  const onMouseUp = () => {
     debounce(() => {
-      if (this.doucleckicked) {
-        this.doucleckicked = false;
-        this.dismissMouseUp++;
-      } else if(this.dismissMouseUp > 0) {
-        this.dismissMouseUp--;
+      if (doucleckicked) {
+        doucleckicked = false;
+        dismissMouseUp++;
+      } else if(dismissMouseUp > 0) {
+        dismissMouseUp--;
       } else {
-        this.mouseEvent.bind(this)();
+        mouseEvent();
       }
-    }, 200).bind(this)();
-  }
+    }, 200)();
+  };
 
-  onDoubleClick(event) {
-    event.stopPropagation();
+  const onDoubleClick = e => {
+    e.stopPropagation();
 
-    this.doucleckicked = true;
-    this.mouseEvent.bind(this)();
-  }
+    doucleckicked = true;
+    mouseEvent();
+  };
 
-  rangeRenderer(letterGroup, range, textCharIndex, onMouseOverHighlightedWord) {
-    return this.props.rangeRenderer
-      ? this.props.rangeRenderer(letterGroup, range, textCharIndex, onMouseOverHighlightedWord)
+  const rangeRendererDefault = (letterGroup, range, textCharIndex, onMouseOverHighlightedWord) => {
+    return rangeRenderer
+      ? rangeRenderer(letterGroup, range, textCharIndex, onMouseOverHighlightedWord)
       : letterGroup;
-  }
+  };
 
-  getNode(i, range, text, url, isEmoji) {
+  const getNode = (i, r, t, url, isEmoji) => {
     if(url.length) {
-      return this.getUrlNode(i, range, url);
-    }else if(isEmoji) {
-      return this.getEmojiNode(i, range);
+      return getUrlNode(i, r, url);
+    } else if(isEmoji) {
+      return getEmojiNode(i, r);
     }
 
-    return this.getLetterNode(i, range);
-  }
+    return getLetterNode(i, r);
+  };
 
-  getRanges() {
+  const getRanges = () => {
     const newText = [];
+
     let lastRange;
 
     // For all the characters on the text
-    for(let textCharIndex = 0;textCharIndex < this.props.text.length;textCharIndex++) {
-      const range = this.getRange(textCharIndex);
-      const url = getUrl(textCharIndex, this.props.text);
-      const isEmoji = emojiRegex().test(this.props.text[textCharIndex] + this.props.text[textCharIndex + 1]);
+    for(let textCharIndex = 0;textCharIndex < text.length;textCharIndex++) {
+      const range = getRange(textCharIndex);
+      const url = getUrl(textCharIndex, text);
+      const isEmoji = emojiRegex().test(text[textCharIndex] + text[textCharIndex + 1]);
       // Get the current character node
-      const node = this.getNode(textCharIndex, range, this.props.text, url, isEmoji);
+      const node = getNode(textCharIndex, range, text, url, isEmoji);
 
       // If the next node is an url one, we fast forward to the end of it
       if(url.length) {
@@ -161,45 +173,41 @@ export default class Highlightable extends Component {
       let rangeCharIndex = textCharIndex + 1;
 
       for(;rangeCharIndex < parseInt(range.end) + 1;rangeCharIndex++) {
-        const isEmoji = emojiRegex().test(`${this.props.text[rangeCharIndex]}${this.props.text[rangeCharIndex + 1]}`);
+        const isEmoji = emojiRegex().test(`${text[rangeCharIndex]}${text[rangeCharIndex + 1]}`);
 
         if(isEmoji) {
-          letterGroup.push(this.getEmojiNode(rangeCharIndex, range));
+          letterGroup.push(getEmojiNode(rangeCharIndex, range));
           // Because an emoji is composed of 2 chars
           rangeCharIndex++;
         } else {
-          letterGroup.push(this.getLetterNode(rangeCharIndex, range));
+          letterGroup.push(getLetterNode(rangeCharIndex, range));
         }
 
         textCharIndex = rangeCharIndex;
       }
 
-      newText.push(this.rangeRenderer(letterGroup,
+      newText.push(rangeRendererDefault(letterGroup,
         range,
         textCharIndex,
-        this.onMouseOverHighlightedWord.bind(this)));
+        onMouseOverHighlightedWordHandler));
     }
 
     if(lastRange) {
       // Callback function
-      this.onMouseOverHighlightedWord(lastRange, true);
+      onMouseOverHighlightedWordHandler(lastRange, true);
     }
 
     return newText;
-  }
+  };
 
-  render() {
-    const newText = this.getRanges();
-
-    return (
-      <div style={this.props.style}
-        onMouseUp={this.onMouseUp.bind(this)}
-        onDoubleClick={this.onDoubleClick.bind(this)}>
-        {newText}
-      </div>
-    );
-  }
-}
+  return (
+    <div style={style}
+      onMouseUp={onMouseUp}
+      onDoubleClick={onDoubleClick}>
+      {getRanges()}
+    </div>
+  );
+};
 
 Highlightable.propTypes = {
   ranges: PropTypes.array,
@@ -211,7 +219,12 @@ Highlightable.propTypes = {
   enabled: PropTypes.bool,
   onMouseOverHighlightedWord: PropTypes.func,
   onTextHighlighted: PropTypes.func,
-  highlightStyle: PropTypes.object,
+  highlightStyle: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.func
+  ]),
   style: PropTypes.object,
   rangeRenderer: PropTypes.func
 };
+
+export default Highlightable;

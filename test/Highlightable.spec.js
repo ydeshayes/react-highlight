@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 import React from 'react';
 import { expect } from 'chai';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import Highlightable, { Range } from '../src';
 
