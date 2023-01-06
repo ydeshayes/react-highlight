@@ -32,7 +32,7 @@
     "react-addons-test-utils": "^15.6.2",
     "react-dom": "^17.0.1",
     "sinon": "^2.4.1",
-    "webpack": "3.4.1",
+    "webpack": "5.75.0",
     "yargs": "8.0.2"
   },
   "repository": {
