@@ -17,6 +17,7 @@ const Highlightable = (
     text,
     enabled,
     rangeRenderer,
+    nodeRenderer,
     style,
     onTextHighlighted
   }) => {
@@ -129,6 +130,10 @@ const Highlightable = (
   };
 
   const getNode = (i, r, t, url, isEmoji) => {
+    if(nodeRenderer) {
+      return nodeRenderer(i, r, t, url, isEmoji);
+    }
+    
     if(url.length) {
       return getUrlNode(i, r, url);
     } else if(isEmoji) {
@@ -175,12 +180,13 @@ const Highlightable = (
       for(;rangeCharIndex < parseInt(range.end) + 1;rangeCharIndex++) {
         const isEmoji = emojiRegex().test(`${text[rangeCharIndex]}${text[rangeCharIndex + 1]}`);
 
+        
         if(isEmoji) {
           letterGroup.push(getEmojiNode(rangeCharIndex, range));
           // Because an emoji is composed of 2 chars
           rangeCharIndex++;
         } else {
-          letterGroup.push(getLetterNode(rangeCharIndex, range));
+          letterGroup.push(getNode(rangeCharIndex, range, text, url, isEmoji));
         }
 
         textCharIndex = rangeCharIndex;
@@ -224,7 +230,8 @@ Highlightable.propTypes = {
     PropTypes.func
   ]),
   style: PropTypes.object,
-  rangeRenderer: PropTypes.func
+  rangeRenderer: PropTypes.func,
+  nodeRenderer: PropTypes.func
 };
 
 export default Highlightable;

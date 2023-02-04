@@ -52,6 +52,9 @@ ReactJS component that help you highlight ranges of text and give you callbacks 
 * **rangeRenderer** -> func: Use this function to customise the render of the highlighted text.
 `(currentRenderedNodes, currentRenderedRange, currentRenderedIndex, onMouseOverHighlightedWord) => {return node}`
 
+* **nodeRenderer** -> func: Use this function to customise the render of the nodes.
+`(charIndex, range, text, url, isEmoji) => {return node}`
+
 ### Range object:
 
 The range object attributes:
