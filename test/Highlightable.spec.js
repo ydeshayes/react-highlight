@@ -3,7 +3,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import Highlightable, { Range } from '../src';
+import Highlightable, { Range, Node } from '../src';
 
 describe('Highlightable component', function () {
   describe('with basic props', function () {
@@ -263,6 +263,50 @@ describe('Highlightable component', function () {
       expect(onTextHighlighted).to.have.property('callCount', 0);
 
       expect(wrapper.containsMatchingElement(<a>http://www.google.fr</a>)).to.equal(true);
+    });
+  });
+
+  describe('with custom node', function() {
+    it('should render the text wit custom node', () => {
+      const onMouseOverHighlightedWord = sinon.spy();
+      const onTextHighlighted = sinon.spy();
+      const nodeRenderer = sinon.spy((i, r, text) => {
+        return <Node id="test"
+        range={r}
+        charIndex={i}
+        key={`test-${i}`}>{text[i]}</Node>
+      });
+      const range = [];
+      const text = 'test the text';
+
+      const wrapper = mount(<Highlightable
+           ranges={range}
+           enabled={true}
+           onTextHighlighted={onTextHighlighted}
+           name={'test'}
+           onMouseOverHighlightedWord={onMouseOverHighlightedWord}
+           rangeRenderer={(a, b) => b}
+           highlightStyle={{
+             backgroundColor: '#ffcc80',
+             enabled: true
+           }}
+           nodeRenderer={nodeRenderer}
+           text={text}
+        />);
+
+      expect(onMouseOverHighlightedWord).to.have.property('callCount', 0);
+      expect(onTextHighlighted).to.have.property('callCount', 0);
+      expect(nodeRenderer).to.have.property('callCount', 13);
+
+      expect(wrapper.containsMatchingElement(<span>t</span>)).to.equal(true);
+      expect(wrapper.containsMatchingElement(<span>e</span>)).to.equal(true);
+      expect(wrapper.containsMatchingElement(<span>s</span>)).to.equal(true);
+
+      wrapper.find('span').forEach((w, index) => {
+        expect(w.props()['data-position']).to.equal(index);
+        expect(w.props().style).to.equal(undefined);
+        expect(w.props().children).to.equal(text[index]);
+      });
     });
   });
 });

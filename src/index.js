@@ -1,4 +1,13 @@
 import Highlightable from './Highlightable';
+import Range from './Range';
+import EmojiNode from './nodes/EmojiNode';
+import Node from './nodes/Node';
+import UrlNode from './nodes/UrlNode';
 
 export default Highlightable;
-export const Range = require('./Range');
+export {
+    Range,
+    EmojiNode,
+    UrlNode,
+    Node
+};
