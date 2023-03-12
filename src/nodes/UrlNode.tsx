@@ -1,9 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import Node from './Node';
+import Node, { NodeProps } from './Node';
 
-const UrlNode = props => {
+export type UrlNodeType = {
+  url: string;
+} & NodeProps;
+
+const UrlNode = (props: UrlNodeType) => {
   const style = {wordWrap: 'break-word'};
 
   return <Node id={props.id}
@@ -17,14 +20,6 @@ const UrlNode = props => {
       {props.url}
     </a>
   </Node>;
-};
-
-UrlNode.propTypes = {
-  highlightStyle: PropTypes.object,
-  id: PropTypes.string,
-  charIndex: PropTypes.number,
-  range: PropTypes.object,
-  url: PropTypes.string
 };
 
 export default UrlNode;

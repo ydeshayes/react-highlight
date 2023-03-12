@@ -1,0 +1,884 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Highlightable component testing update should highlight text 1`] = `
+<div
+  onDoubleClick={[Function]}
+  onMouseUp={[Function]}
+>
+  <span
+    data-position={0}
+  >
+    t
+  </span>
+  <span
+    data-position={1}
+  >
+    e
+  </span>
+  <span
+    data-position={2}
+  >
+    s
+  </span>
+  <span
+    data-position={3}
+  >
+    t
+  </span>
+  <span
+    data-position={4}
+  >
+     
+  </span>
+  <span
+    data-position={5}
+  >
+    t
+  </span>
+  <span
+    data-position={6}
+  >
+    h
+  </span>
+  <span
+    data-position={7}
+  >
+    e
+  </span>
+  <span
+    data-position={8}
+  >
+     
+  </span>
+  <span
+    data-position={9}
+  >
+    t
+  </span>
+  <span
+    data-position={10}
+  >
+    e
+  </span>
+  <span
+    data-position={11}
+  >
+    x
+  </span>
+  <span
+    data-position={12}
+  >
+    t
+  </span>
+</div>
+`;
+
+exports[`Highlightable component testing update should highlight text 2`] = `
+<div
+  onDoubleClick={[Function]}
+  onMouseUp={[Function]}
+>
+  <span
+    data-position={0}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+    t
+  </span>
+  <span
+    data-position={1}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+    e
+  </span>
+  <span
+    data-position={2}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+    s
+  </span>
+  <span
+    data-position={3}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+    t
+  </span>
+  <span
+    data-position={4}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+     
+  </span>
+  <span
+    data-position={5}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+    t
+  </span>
+  <span
+    data-position={6}
+  >
+    h
+  </span>
+  <span
+    data-position={7}
+  >
+    e
+  </span>
+  <span
+    data-position={8}
+  >
+     
+  </span>
+  <span
+    data-position={9}
+  >
+    t
+  </span>
+  <span
+    data-position={10}
+  >
+    e
+  </span>
+  <span
+    data-position={11}
+  >
+    x
+  </span>
+  <span
+    data-position={12}
+  >
+    t
+  </span>
+</div>
+`;
+
+exports[`Highlightable component with basic props should render the text without highlight 1`] = `
+<div
+  onDoubleClick={[Function]}
+  onMouseUp={[Function]}
+>
+  <span
+    data-position={0}
+  >
+    t
+  </span>
+  <span
+    data-position={1}
+  >
+    e
+  </span>
+  <span
+    data-position={2}
+  >
+    s
+  </span>
+  <span
+    data-position={3}
+  >
+    t
+  </span>
+  <span
+    data-position={4}
+  >
+     
+  </span>
+  <span
+    data-position={5}
+  >
+    t
+  </span>
+  <span
+    data-position={6}
+  >
+    h
+  </span>
+  <span
+    data-position={7}
+  >
+    e
+  </span>
+  <span
+    data-position={8}
+  >
+     
+  </span>
+  <span
+    data-position={9}
+  >
+    t
+  </span>
+  <span
+    data-position={10}
+  >
+    e
+  </span>
+  <span
+    data-position={11}
+  >
+    x
+  </span>
+  <span
+    data-position={12}
+  >
+    t
+  </span>
+</div>
+`;
+
+exports[`Highlightable component with custom node should render the text wit custom node 1`] = `
+<div
+  onDoubleClick={[Function]}
+  onMouseUp={[Function]}
+>
+  <span
+    data-position={0}
+  >
+    t
+  </span>
+  <span
+    data-position={1}
+  >
+    e
+  </span>
+  <span
+    data-position={2}
+  >
+    s
+  </span>
+  <span
+    data-position={3}
+  >
+    t
+  </span>
+  <span
+    data-position={4}
+  >
+     
+  </span>
+  <span
+    data-position={5}
+  >
+    t
+  </span>
+  <span
+    data-position={6}
+  >
+    h
+  </span>
+  <span
+    data-position={7}
+  >
+    e
+  </span>
+  <span
+    data-position={8}
+  >
+     
+  </span>
+  <span
+    data-position={9}
+  >
+    t
+  </span>
+  <span
+    data-position={10}
+  >
+    e
+  </span>
+  <span
+    data-position={11}
+  >
+    x
+  </span>
+  <span
+    data-position={12}
+  >
+    t
+  </span>
+</div>
+`;
+
+exports[`Highlightable component with range props should render with highlighted text 1`] = `
+<div
+  onDoubleClick={[Function]}
+  onMouseUp={[Function]}
+>
+  <span
+    data-position={0}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+    t
+  </span>
+  <span
+    data-position={1}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+    e
+  </span>
+  <span
+    data-position={2}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+    s
+  </span>
+  <span
+    data-position={3}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+    t
+  </span>
+  <span
+    data-position={4}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+     
+  </span>
+  <span
+    data-position={5}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+    t
+  </span>
+  <span
+    data-position={6}
+  >
+    h
+  </span>
+  <span
+    data-position={7}
+  >
+    e
+  </span>
+  <span
+    data-position={8}
+  >
+     
+  </span>
+  <span
+    data-position={9}
+  >
+    t
+  </span>
+  <span
+    data-position={10}
+  >
+    e
+  </span>
+  <span
+    data-position={11}
+  >
+    x
+  </span>
+  <span
+    data-position={12}
+  >
+    t
+  </span>
+</div>
+`;
+
+exports[`Highlightable component with smiley should highlight text and keep the smiley at the end of the highlighted text 1`] = `
+<div
+  onDoubleClick={[Function]}
+  onMouseUp={[Function]}
+>
+  <span
+    data-position={0}
+  >
+    t
+  </span>
+  <span
+    data-position={1}
+  >
+    e
+  </span>
+  <span
+    data-position={2}
+  >
+    s
+  </span>
+  <span
+    data-position={3}
+  >
+    t
+  </span>
+  <span
+    data-position={4}
+  >
+     
+  </span>
+  <span
+    data-position={5}
+  >
+    t
+  </span>
+  <span
+    data-position={6}
+  >
+    h
+  </span>
+  <span
+    data-position={7}
+  >
+    e
+  </span>
+  <span
+    data-position={8}
+  >
+     
+  </span>
+  <span
+    data-position={9}
+  >
+    t
+  </span>
+  <span
+    data-position={10}
+  >
+    e
+  </span>
+  <span
+    data-position={11}
+  >
+    x
+  </span>
+  <span
+    data-position={12}
+  >
+    t
+  </span>
+  <span
+    data-position={13}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+     
+  </span>
+  <span
+    data-position={14}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+    😘
+  </span>
+</div>
+`;
+
+exports[`Highlightable component with smiley should highlight text and keep the smiley at the end of the text 1`] = `
+<div
+  onDoubleClick={[Function]}
+  onMouseUp={[Function]}
+>
+  <span
+    data-position={0}
+  >
+    t
+  </span>
+  <span
+    data-position={1}
+  >
+    e
+  </span>
+  <span
+    data-position={2}
+  >
+    s
+  </span>
+  <span
+    data-position={3}
+  >
+    t
+  </span>
+  <span
+    data-position={4}
+  >
+     
+  </span>
+  <span
+    data-position={5}
+  >
+    t
+  </span>
+  <span
+    data-position={6}
+  >
+    h
+  </span>
+  <span
+    data-position={7}
+  >
+    e
+  </span>
+  <span
+    data-position={8}
+  >
+     
+  </span>
+  <span
+    data-position={9}
+  >
+    t
+  </span>
+  <span
+    data-position={10}
+  >
+    e
+  </span>
+  <span
+    data-position={11}
+  >
+    x
+  </span>
+  <span
+    data-position={12}
+  >
+    t
+  </span>
+  <span
+    data-position={13}
+  >
+     
+  </span>
+  <span
+    data-position={14}
+  >
+    😘
+  </span>
+</div>
+`;
+
+exports[`Highlightable component with smiley should highlight text and keep the smiley in the middle of the highlighted text 1`] = `
+<div
+  onDoubleClick={[Function]}
+  onMouseUp={[Function]}
+>
+  <span
+    data-position={0}
+  >
+    t
+  </span>
+  <span
+    data-position={1}
+  >
+    e
+  </span>
+  <span
+    data-position={2}
+  >
+    s
+  </span>
+  <span
+    data-position={3}
+  >
+    t
+  </span>
+  <span
+    data-position={4}
+  >
+     
+  </span>
+  <span
+    data-position={5}
+  >
+    t
+  </span>
+  <span
+    data-position={6}
+  >
+    h
+  </span>
+  <span
+    data-position={7}
+  >
+    e
+  </span>
+  <span
+    data-position={8}
+  >
+     
+  </span>
+  <span
+    data-position={9}
+  >
+    t
+  </span>
+  <span
+    data-position={10}
+  >
+    e
+  </span>
+  <span
+    data-position={11}
+  >
+    x
+  </span>
+  <span
+    data-position={12}
+  >
+    t
+  </span>
+  <span
+    data-position={13}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+     
+  </span>
+  <span
+    data-position={14}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+    😘
+  </span>
+  <span
+    data-position={16}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+     
+  </span>
+  <span
+    data-position={17}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+    t
+  </span>
+  <span
+    data-position={18}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+      }
+    }
+  >
+    e
+  </span>
+  <span
+    data-position={19}
+  >
+    s
+  </span>
+  <span
+    data-position={20}
+  >
+    t
+  </span>
+  <span
+    data-position={21}
+  >
+     
+  </span>
+  <span
+    data-position={22}
+  >
+    a
+  </span>
+  <span
+    data-position={23}
+  >
+    g
+  </span>
+  <span
+    data-position={24}
+  >
+    a
+  </span>
+  <span
+    data-position={25}
+  >
+    i
+  </span>
+  <span
+    data-position={26}
+  >
+    n
+  </span>
+</div>
+`;
+
+exports[`Highlightable component with url should render with highlighted url 1`] = `
+<div
+  onDoubleClick={[Function]}
+  onMouseUp={[Function]}
+>
+  <span
+    data-position={0}
+  >
+    t
+  </span>
+  <span
+    data-position={1}
+  >
+    e
+  </span>
+  <span
+    data-position={2}
+  >
+    s
+  </span>
+  <span
+    data-position={3}
+  >
+    t
+  </span>
+  <span
+    data-position={4}
+  >
+     
+  </span>
+  <span
+    data-position={5}
+    style={
+      {
+        "backgroundColor": "#ffcc80",
+        "enabled": true,
+        "wordWrap": "break-word",
+      }
+    }
+  >
+    <a
+      data-position={25}
+      href="http://www.google.fr"
+      target="blank"
+    >
+      http://www.google.fr
+    </a>
+  </span>
+</div>
+`;
+
+exports[`Highlightable component with url should render with url 1`] = `
+<div
+  onDoubleClick={[Function]}
+  onMouseUp={[Function]}
+>
+  <span
+    data-position={0}
+  >
+    t
+  </span>
+  <span
+    data-position={1}
+  >
+    e
+  </span>
+  <span
+    data-position={2}
+  >
+    s
+  </span>
+  <span
+    data-position={3}
+  >
+    t
+  </span>
+  <span
+    data-position={4}
+  >
+     
+  </span>
+  <span
+    data-position={5}
+    style={
+      {
+        "wordWrap": "break-word",
+      }
+    }
+  >
+    <a
+      data-position={25}
+      href="http://www.google.fr"
+      target="blank"
+    >
+      http://www.google.fr
+    </a>
+  </span>
+</div>
+`;

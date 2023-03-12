@@ -1,9 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import Node from './Node';
+import Node, { NodeProps } from './Node';
 
-const EmojiNode = props => {
+export type EmojiNodeType = {
+  text: string;
+} & NodeProps;
+
+const EmojiNode = (props: EmojiNodeType) => {
 
   return <Node id={props.id}
     highlightStyle={props.highlightStyle}
@@ -11,14 +14,6 @@ const EmojiNode = props => {
     range={props.range}>
     {`${props.text[props.charIndex]}${props.text[props.charIndex + 1]}`}
   </Node>;
-};
-
-EmojiNode.propTypes = {
-  highlightStyle: PropTypes.object,
-  id: PropTypes.string,
-  charIndex: PropTypes.number,
-  range: PropTypes.object,
-  text: PropTypes.string
 };
 
 export default EmojiNode;
