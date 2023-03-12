@@ -1,18 +1,12 @@
-var webpack = require('webpack');
-var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const webpack = require('webpack');
+const TerserPlugin = require("terser-webpack-plugin");
 var path = require('path');
-var env = require('yargs').argv.env;
 
 var libraryName = 'Highlightable';
 
 var plugins = [], outputFile;
 
-if (env.mode === 'build') {
-  plugins.push(new UglifyJsPlugin({ minimize: true }));
-  outputFile = libraryName + '.min.js';
-} else {
-  outputFile = libraryName + '.js';
-}
+outputFile = libraryName + '.min.js';
 
 var config = {
   entry: __dirname + '/src/index.js',
@@ -24,17 +18,16 @@ var config = {
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
   module: {
     rules: [
       {
-        test: /(\.jsx|\.js)$/,
+        test: /(\.tsx|\.ts)$/,
         loader: 'babel-loader',
         exclude: /(node_modules|bower_components)/
-      },
-      {
-        test: /(\.jsx|\.js)$/,
-        loader: "eslint-loader",
-        exclude: /node_modules/
       }
     ]
   },
@@ -43,7 +36,7 @@ var config = {
       path.resolve('./src'),
       path.resolve('./node_modules')
     ],
-    extensions: ['.js']
+    extensions: ['.js', '.tsx', '.ts']
   },
   plugins: plugins
 };
