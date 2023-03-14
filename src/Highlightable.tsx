@@ -1,6 +1,5 @@
+import React, { FunctionComponent, ReactNode } from 'react';
 import emojiRegex from 'emoji-regex';
-import React from 'react';
-import PropTypes from 'prop-types';
 
 import EmojiNode from './nodes/EmojiNode';
 import Node from './nodes/Node';
@@ -8,7 +7,32 @@ import Range from './Range';
 import UrlNode from './nodes/UrlNode';
 import {getUrl, debounce} from './helpers';
 
-const Highlightable = (
+export type CustomHTMLNode = {
+  dataset: {
+    position: string
+  }
+} & ParentNode;
+
+export type HighlightStyle = Record<string, string>;
+export type HighlightStyleFunc = ((range: Range, charIndex: number) => HighlightStyle);
+
+export type OnMouseOverHighlightedWord = (range: Range) => void;
+export type OnMouseOverHighlightedWordHandler = (range: Range, isVisible: boolean) => void;
+
+export interface HighlightableProps {
+    ranges: Range[],
+    onMouseOverHighlightedWord: OnMouseOverHighlightedWord,
+    id: string,
+    highlightStyle?: HighlightStyle | HighlightStyleFunc,
+    text: string,
+    enabled: boolean,
+    rangeRenderer?: (currentRenderedNodes: JSX.Element[], currentRenderedRange: Range, currentRenderedIndex: number, onMouseOverHighlightedWord: OnMouseOverHighlightedWordHandler) => JSX.Element,
+    nodeRenderer?: (charIndex: number, range: Range, text: string, url: string, isEmoji: boolean) => JSX.Element,
+    style: Record<string, string>,
+    onTextHighlighted: (range: Range) => void
+};
+
+const Highlightable: FunctionComponent<HighlightableProps> = (
   {
     ranges,
     onMouseOverHighlightedWord,
@@ -20,23 +44,23 @@ const Highlightable = (
     nodeRenderer,
     style,
     onTextHighlighted
-  }) => {
+  }: HighlightableProps) => {
   let dismissMouseUp = 0;
 
   let doucleckicked = false;
 
-  const getRange = charIndex => {
+  const getRange = (charIndex: number) => {
     return ranges
             && ranges.find(r => charIndex >= r.start && charIndex <= r.end);
   };
 
-  const onMouseOverHighlightedWordHandler = (range, visible) => {
+  const onMouseOverHighlightedWordHandler = (range: Range, visible: boolean): void => {
     if(visible && onMouseOverHighlightedWord) {
       onMouseOverHighlightedWord(range);
     }
   };
 
-  const getLetterNode = (charIndex, range) => {
+  const getLetterNode = (charIndex: number, range: Range) => {
     return (<Node id={id}
       range={range}
       charIndex={charIndex}
@@ -46,7 +70,7 @@ const Highlightable = (
     </Node>);
   };
 
-  const getEmojiNode = (charIndex, range) => {
+  const getEmojiNode = (charIndex: number, range: Range) => {
     return (<EmojiNode text={text}
       id={id}
       range={range}
@@ -55,7 +79,7 @@ const Highlightable = (
       highlightStyle={highlightStyle} />);
   };
 
-  const getUrlNode = (charIndex, range, url) => {
+  const getUrlNode = (charIndex: number, range: Range, url: string) => {
     return (<UrlNode url={url}
       id={id}
       range={range}
@@ -73,8 +97,8 @@ const Highlightable = (
 
     if (window.getSelection) {
       t = window.getSelection().toString();
-    } else if (document.selection && document.selection.type !== 'Control') {
-      t = document.selection.createRange().text;
+    } else if (document.getSelection() && document.getSelection().type !== 'Control') {
+      t = document.createRange().toString();
     }
 
     if(!t || !t.length) {
@@ -83,8 +107,8 @@ const Highlightable = (
 
     const r = window.getSelection().getRangeAt(0);
 
-    const startContainerPosition = parseInt(r.startContainer.parentNode.dataset.position);
-    const endContainerPosition = parseInt(r.endContainer.parentNode.dataset.position);
+    const startContainerPosition = parseInt((r.startContainer.parentNode as CustomHTMLNode).dataset.position);
+    const endContainerPosition = parseInt((r.endContainer.parentNode as CustomHTMLNode).dataset.position);
 
     const startHL = startContainerPosition < endContainerPosition ? startContainerPosition : endContainerPosition;
     const endHL = startContainerPosition < endContainerPosition ? endContainerPosition : startContainerPosition;
@@ -116,20 +140,21 @@ const Highlightable = (
     }, 200)();
   };
 
-  const onDoubleClick = e => {
+  const onDoubleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
 
     doucleckicked = true;
     mouseEvent();
   };
 
-  const rangeRendererDefault = (letterGroup, range, textCharIndex, onMouseOverHighlightedWord) => {
+  const rangeRendererDefault = (letterGroup: JSX.Element[], range: Range, textCharIndex: number, onMouseOverHighlightedWord: OnMouseOverHighlightedWordHandler) => {
     return rangeRenderer
       ? rangeRenderer(letterGroup, range, textCharIndex, onMouseOverHighlightedWord)
       : letterGroup;
   };
 
-  const getNode = (i, r, t, url, isEmoji) => {
+  // charIndex: number, range: Range, text: string, url: string, isEmoji: boolean
+  const getNode = (i: number, r: Range, t: string, url: string, isEmoji: boolean): JSX.Element => {
     if(nodeRenderer) {
       return nodeRenderer(i, r, t, url, isEmoji);
     }
@@ -143,7 +168,7 @@ const Highlightable = (
     return getLetterNode(i, r);
   };
 
-  const getRanges = () => {
+  const getRanges = (): ReactNode => {
     const newText = [];
 
     let lastRange;
@@ -177,7 +202,7 @@ const Highlightable = (
       // For all the characters in the highlighted range
       let rangeCharIndex = textCharIndex + 1;
 
-      for(;rangeCharIndex < parseInt(range.end) + 1;rangeCharIndex++) {
+      for(;rangeCharIndex < range.end + 1;rangeCharIndex++) {
         const isEmoji = emojiRegex().test(`${text[rangeCharIndex]}${text[rangeCharIndex + 1]}`);
 
         
@@ -213,25 +238,6 @@ const Highlightable = (
       {getRanges()}
     </div>
   );
-};
-
-Highlightable.propTypes = {
-  ranges: PropTypes.array,
-  id: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
-  text: PropTypes.string,
-  enabled: PropTypes.bool,
-  onMouseOverHighlightedWord: PropTypes.func,
-  onTextHighlighted: PropTypes.func,
-  highlightStyle: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.func
-  ]),
-  style: PropTypes.object,
-  rangeRenderer: PropTypes.func,
-  nodeRenderer: PropTypes.func
 };
 
 export default Highlightable;

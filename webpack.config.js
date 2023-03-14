@@ -9,7 +9,7 @@ var plugins = [], outputFile;
 outputFile = libraryName + '.min.js';
 
 var config = {
-  entry: __dirname + '/src/index.js',
+  entry: __dirname + '/src/index.ts',
   devtool: 'source-map',
   output: {
     path: __dirname + '/lib',
