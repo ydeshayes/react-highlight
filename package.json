@@ -1,6 +1,6 @@
 {
   "name": "highlightable",
-  "version": "1.2.0-beta.0",
+  "version": "1.3.0-beta.0",
   "description": "Component that help highlighting text",
   "main": "lib/Highlightable.min.js",
   "types": "types/index.d.ts",
